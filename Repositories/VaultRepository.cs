@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using Dapper;
@@ -49,7 +50,27 @@ namespace Keepr.Repositories
       return _db.QueryFirstOrDefault<Vault>($"SELECT * FROM Vaults WHERE id = @id", new { id });
     }
 
+    //Edit vault
 
+    public Vault EditVault(int id, Vault newvault)
+    {
+      try
+      {
+        return _db.QueryFirstOrDefault<Vault>($@"
+          UPDATE Vaults SET
+            Name = @Name,
+            Description = @Description,
+            UserId = @UserId
+          WHERE Id = @Id;
+          SELECT * FROM Vaults WHERE id = @Id;
+        ", newvault);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+        return null;
+      }
+    }
 
   }
 

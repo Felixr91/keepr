@@ -18,7 +18,10 @@ namespace Keepr.Controllers
       _repo = repo;
     }
 
+
     //Create Vault
+
+
     [HttpPost]
     public Vault AddVault([FromBody] VaultToCreate val)
     {
@@ -26,6 +29,9 @@ namespace Keepr.Controllers
       return _repo.AddVault(val);
       //return ok()
     }
+
+    //Delete Vault
+
 
     [HttpDelete("{id}")]
     public ActionResult<string> DeleteVault(int id)
@@ -38,9 +44,11 @@ namespace Keepr.Controllers
     }
 
 
-    // GET by ID
+    // GET Vault by ID
+
+
     [HttpGet("{id}")]
-    public ActionResult<Vault> Get(int id)
+    public ActionResult<Vault> GetVault(int id)
     {
       Vault result = _repo.GetVaultById(id);
       if (result != null)
@@ -50,7 +58,24 @@ namespace Keepr.Controllers
       return BadRequest();
     }
 
+    //Edit Vault
 
+
+    [HttpPut("{id}")]
+    public ActionResult<Vault> EditVault(int id, [FromBody] Vault value)
+    {
+      //Ask an instructor about this "if" statement!
+      if (value.Id == 0)
+      {
+        value.Id = id;
+      }
+      Vault result = _repo.EditVault(id, value);
+      if (result != null)
+      {
+        return Ok(result);
+      }
+      return NotFound();
+    }
 
 
 
