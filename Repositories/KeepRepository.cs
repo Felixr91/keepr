@@ -7,10 +7,10 @@ using Keepr.Models;
 
 namespace Keepr.Repositories
 {
-  public class KeepRepository
+  public class KeepsRepository
   {
     private readonly IDbConnection _db;
-    public KeepRepository(IDbConnection db)
+    public KeepsRepository(IDbConnection db)
     {
       _db = db;
     }
@@ -36,6 +36,15 @@ namespace Keepr.Repositories
         Shares = newKeep.Shares,
         Keeps = newKeep.Keeps
       };
+    }
+
+    //Delete Keep
+    public bool DeleteKeep(int id)
+    {
+      int success = _db.Execute(@"
+      DELETE FROM Keeps WHERE id = @id
+      ", new { id });
+      return success != 0;
     }
   }
 }

@@ -6,10 +6,10 @@ using Keepr.Models;
 
 namespace Keepr.Repositories
 {
-  public class VaultRepository
+  public class VaultsRepository
   {
     private readonly IDbConnection _db;
-    public VaultRepository(IDbConnection db)
+    public VaultsRepository(IDbConnection db)
     {
       _db = db;
     }
@@ -34,7 +34,7 @@ namespace Keepr.Repositories
         Id = id
       };
     }
-
+    //Delete Vault
     public bool DeleteVault(int id)
     {
       int success = _db.Execute(@"

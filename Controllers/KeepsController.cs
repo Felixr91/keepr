@@ -10,10 +10,10 @@ namespace Keepr.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class KeepControlller : ControllerBase
+  public class KeepsControlller : ControllerBase
   {
-    private readonly KeepRepository _repo;
-    public KeepControlller(KeepRepository repo)
+    private readonly KeepsRepository _repo;
+    public KeepsControlller(KeepsRepository repo)
     {
       _repo = repo;
     }
@@ -23,6 +23,17 @@ namespace Keepr.Controllers
     {
       val.UserId = HttpContext.User.Identity.Name;
       return _repo.AddKeep(val);
+    }
+
+    //Delete Keep
+    [HttpDelete("{id}")]
+    public ActionResult<string> DeleteKeep(int id)
+    {
+      if (_repo.DeleteKeep(id))
+      {
+        return Ok("Successfully Deleted!");
+      }
+      return BadRequest("Unable to delete!");
     }
   }
 }
