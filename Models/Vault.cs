@@ -22,4 +22,13 @@ namespace Keepr.Models
     [Required]
     public int Id { get; set; }
   }
+
+  public class VaultKeep
+  {
+    public int Id { get; set; }
+    [Required]
+    public int VaultId { get; set; }
+    [Required]
+    public int KeepId { get; set; }
+  }
 }

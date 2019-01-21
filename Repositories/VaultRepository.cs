@@ -43,7 +43,7 @@ namespace Keepr.Repositories
       return success != 0;
     }
 
-    //GetById
+    //Get Vault By ID
 
     public Vault GetVaultById(int id)
     {

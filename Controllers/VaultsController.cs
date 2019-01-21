@@ -20,8 +20,6 @@ namespace Keepr.Controllers
 
 
     //Create Vault
-
-
     [HttpPost]
     public Vault AddVault([FromBody] VaultToCreate val)
     {
@@ -64,11 +62,9 @@ namespace Keepr.Controllers
     [HttpPut("{id}")]
     public ActionResult<Vault> EditVault(int id, [FromBody] Vault value)
     {
-      //Ask an instructor about this "if" statement!
-      if (value.Id == 0)
-      {
-        value.Id = id;
-      }
+
+      value.Id = id;
+
       Vault result = _repo.EditVault(id, value);
       if (result != null)
       {

@@ -1,9 +1,9 @@
 using System;
 using System.Data;
 using System.Linq;
-using keepr.Models;
-using Dapper;
 using Keepr.Models;
+using Dapper;
+// using Keepr.Models;
 
 namespace Keepr.Repositories
 {
@@ -19,12 +19,10 @@ namespace Keepr.Repositories
     //Add Keep
     public Keep AddKeep(Keep newKeep)
     {
-      int id = 0;
-      id = _db.ExecuteScalar<int>(@"
+      _db.ExecuteScalar<int>(@"
       INSERT INTO Keeps(name, description, userId, img, isPrivate, views, shares, keeps)
       VALUES (@Name, @Description, @UserId, @Img, @IsPrivate, @Views, @Shares, @Keeps)
       ", newKeep);
-      if (id == 0) return null;
       return new Keep()
       {
         Name = newKeep.Name,
@@ -45,6 +43,33 @@ namespace Keepr.Repositories
       DELETE FROM Keeps WHERE id = @id
       ", new { id });
       return success != 0;
+    }
+
+    //Get Keep by ID
+    public Keep GetKeepById(int id)
+    {
+      return _db.QueryFirstOrDefault<Keep>($"SELECT * FROM Keeps WHERE id = @id", new { id });
+    }
+
+    //Edit Keep
+    public Keep EditKeep(int id, Keep newkeep)
+    {
+      try
+      {
+        return _db.QueryFirstOrDefault<Keep>($@"
+          UPDATE Keeps SET
+            Views = @Views,
+            Shares = @Shares,
+            Keeps=@Keeps
+          WHERE Id = @Id;
+          SELECT * FROM Keeps WHERE id = @Id;
+        ", newkeep);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex);
+        return null;
+      }
     }
   }
 }
