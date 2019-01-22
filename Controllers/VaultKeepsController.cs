@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
-  [Route("api/[controller")]
+  [Route("api/[controller]")]
   [ApiController]
   public class VaultKeepsController : ControllerBase
   {
@@ -22,10 +22,29 @@ namespace Keepr.Controllers
     [HttpPost]
     public VaultKeep AddVaultKeep([FromBody]VaultKeep val)
     {
+
       VaultKeep result = _repo.AddVaultKeep(val);
       return result;
       // return Created("/api/VaultKeep/" + result.Id, result);
     }
 
+    //Delete VaultKeep
+    [HttpDelete("{id}")]
+    public ActionResult<string> DeleteVaultKeep(int id)
+    {
+      if (_repo.DeleteVaultKeep(id))
+      {
+        return Ok("Successfully deleted!");
+      }
+      return BadRequest("Unable to delete!");
+    }
+
+    //Get Keeps By Vault ID
+    [HttpGet("{id}")]
+    public IEnumerable<Keep> GetKeepsByVaultId(int id)
+    {
+      return _repo.GetKeepsByVaultId(id);
+
+    }
   }
 }

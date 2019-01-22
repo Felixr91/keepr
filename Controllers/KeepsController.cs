@@ -4,6 +4,7 @@ using System.Linq;//what is this doing?
 using System.Threading.Tasks;
 using Keepr.Models;
 using Keepr.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
@@ -18,12 +19,18 @@ namespace Keepr.Controllers
       _repo = repo;
     }
 
-    //Create Keep
+    //Add Keep
+    [Authorize]
     [HttpPost]
-    public Keep AddKeep([FromBody]Keep val)
+    public ActionResult<Keep> Post([FromBody]Keep val)
     {
       val.UserId = HttpContext.User.Identity.Name;
-      return _repo.AddKeep(val);
+      if (val.UserId != null)
+      {
+        Keep result = _repo.AddKeep(val);
+        return Created("/api/keeps" + result.Id, result);
+      }
+      return Unauthorized("Login to create keep!!!!");
     }
 
     //Delete Keep
@@ -38,16 +45,26 @@ namespace Keepr.Controllers
     }
 
     //Get Keep by ID
-
-    [HttpGet("{id}")]
-    public ActionResult<Keep> GetKeepById(int id)
+    [Authorize]
+    [HttpGet("user")]
+    public IEnumerable<Keep> Get()
     {
-      Keep result = _repo.GetKeepById(id);
-      if (result != null)
-      {
-        return Ok(result);
-      }
-      return BadRequest();
+      string uid = HttpContext.User.Identity.Name;
+      return _repo.GetKeepByUserId(uid);
+      // Keep result = _repo.GetKeepById(id);
+      // if (result != null)
+      // {
+      //   return Ok(result);
+      // }
+      // return BadRequest();
+
+    }
+
+    //Get All Keeps
+    [HttpGet]
+    public ActionResult<IEnumerable<Keep>> GetAllKeeps()
+    {
+      return Ok(_repo.GetAllKeeps());
     }
 
     //Edit Keep by ID

@@ -44,7 +44,6 @@ namespace Keepr.Controllers
 
     // GET Vault by ID
 
-
     [HttpGet("{id}")]
     public ActionResult<Vault> GetVault(int id)
     {

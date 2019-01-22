@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using Keepr.Models;
 using Dapper;
+using System.Collections.Generic;
 // using Keepr.Models;
 
 namespace Keepr.Repositories
@@ -19,21 +20,22 @@ namespace Keepr.Repositories
     //Add Keep
     public Keep AddKeep(Keep newKeep)
     {
-      _db.ExecuteScalar<int>(@"
-      INSERT INTO Keeps(name, description, userId, img, isPrivate, views, shares, keeps)
-      VALUES (@Name, @Description, @UserId, @Img, @IsPrivate, @Views, @Shares, @Keeps)
+      int id = _db.ExecuteScalar<int>(@"
+      INSERT INTO Keeps(name, description, userId, img, isPrivate)
+      VALUES (@Name, @Description, @UserId, @Img, @IsPrivate)
       ", newKeep);
-      return new Keep()
-      {
-        Name = newKeep.Name,
-        Description = newKeep.Description,
-        UserId = newKeep.UserId,
-        Img = newKeep.Img,
-        IsPrivate = newKeep.IsPrivate,
-        Views = newKeep.Views,
-        Shares = newKeep.Shares,
-        Keeps = newKeep.Keeps
-      };
+      newKeep.Id = id;
+      return newKeep;
+      // {
+      //   Name = newKeep.Name,
+      //   Description = newKeep.Description,
+      //   UserId = newKeep.UserId,
+      //   Img = newKeep.Img,
+      //   IsPrivate = newKeep.IsPrivate,
+      //   Views = newKeep.Views,
+      //   Shares = newKeep.Shares,
+      //   Keeps = newKeep.Keeps
+      // };
     }
 
     //Delete Keep
@@ -46,9 +48,9 @@ namespace Keepr.Repositories
     }
 
     //Get Keep by ID
-    public Keep GetKeepById(int id)
+    public IEnumerable<Keep> GetKeepByUserId(string id)
     {
-      return _db.QueryFirstOrDefault<Keep>($"SELECT * FROM Keeps WHERE id = @id", new { id });
+      return _db.Query<Keep>($"SELECT * FROM Keeps WHERE userId = @id", new { id });
     }
 
     //Edit Keep
@@ -70,6 +72,12 @@ namespace Keepr.Repositories
         Console.WriteLine(ex);
         return null;
       }
+    }
+
+    //Get all keeps
+    public IEnumerable<Keep> GetAllKeeps()
+    {
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE isPrivate = false");
     }
   }
 }
