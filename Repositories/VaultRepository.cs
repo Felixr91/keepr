@@ -43,12 +43,19 @@ namespace Keepr.Repositories
       return success != 0;
     }
 
-    //Get Vault By ID
+    //Get User Vaults(Get Vaults for the logged in user)
 
-    public Vault GetVaultById(int id)
+    public IEnumerable<Vault> GetVaultById(string uid)
     {
-      return _db.QueryFirstOrDefault<Vault>($"SELECT * FROM Vaults WHERE id = @id", new { id });
+      return _db.Query<Vault>($"SELECT * FROM Vaults WHERE userid = @uid", new { uid });
     }
+
+    // GET Individual Vault (check that you are the owner)
+    public Vault GetOneVault(int id)
+    {
+      return _db.QueryFirstOrDefault<Vault>($"SELECT * FROM Vaults WHERE userid = @id", new { id });
+    }
+
 
     //Edit vault
 
@@ -71,6 +78,8 @@ namespace Keepr.Repositories
         return null;
       }
     }
+
+    //Get Vault
 
   }
 

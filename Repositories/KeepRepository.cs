@@ -47,11 +47,12 @@ namespace Keepr.Repositories
       return success != 0;
     }
 
-    //Get Keep by ID
+    //Get User Keeps
     public IEnumerable<Keep> GetKeepByUserId(string id)
     {
       return _db.Query<Keep>($"SELECT * FROM Keeps WHERE userId = @id", new { id });
     }
+
 
     //Edit Keep
     public Keep EditKeep(int id, Keep newkeep)
@@ -74,7 +75,7 @@ namespace Keepr.Repositories
       }
     }
 
-    //Get all keeps
+    //Get Public Keeps
     public IEnumerable<Keep> GetAllKeeps()
     {
       return _db.Query<Keep>("SELECT * FROM keeps WHERE isPrivate = false");

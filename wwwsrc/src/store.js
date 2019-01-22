@@ -19,11 +19,15 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    publicKeeps: []
   },
   mutations: {
     setUser(state, user) {
       state.user = user
+    },
+    setPublicKeeps(state, publicKeeps) {
+      state.publicKeeps = publicKeeps;
     }
   },
   actions: {
@@ -51,11 +55,21 @@ export default new Vuex.Store({
       auth.post('login', creds)
         .then(res => {
           commit('setUser', res.data)
+          // console.log("You're logged in!")
+          // debugger
           router.push({ name: 'home' })
         })
         .catch(e => {
           console.log('Login Failed')
         })
+    },
+    //Get Public Keeps
+    getPublicKeeps({ commit, dispatch }) {
+      api.get('/keeps/')
+        .then(res => {
+          commit("setPublicKeeps", res.data)
+        })
+        .catch(err => console.log('Cannot get public decks'))
     }
   }
 })

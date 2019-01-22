@@ -21,10 +21,6 @@
 <script>
     export default {
         name: "login",
-        mounted() {
-            //checks for valid session
-            this.$store.dispatch("authenticate");
-        },
         data() {
             return {
                 loginForm: true,
@@ -44,6 +40,7 @@
                 this.$store.dispatch("register", this.newUser);
             },
             loginUser() {
+                // console.log("trying to login!")
                 this.$store.dispatch("login", this.creds);
             }
         }

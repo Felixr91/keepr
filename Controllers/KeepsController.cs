@@ -44,7 +44,7 @@ namespace Keepr.Controllers
       return BadRequest("Unable to delete!");
     }
 
-    //Get Keep by ID
+    //Get User Keeps
     [Authorize]
     [HttpGet("user")]
     public IEnumerable<Keep> Get()
@@ -60,7 +60,11 @@ namespace Keepr.Controllers
 
     }
 
-    //Get All Keeps
+
+
+    [HttpGet]
+
+    //Get Public Keeps
     [HttpGet]
     public ActionResult<IEnumerable<Keep>> GetAllKeeps()
     {

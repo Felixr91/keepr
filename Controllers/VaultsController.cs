@@ -28,7 +28,7 @@ namespace Keepr.Controllers
       //return ok()
     }
 
-    //Delete Vault
+    //Delete Vaults
 
 
     [HttpDelete("{id}")]
@@ -42,18 +42,16 @@ namespace Keepr.Controllers
     }
 
 
-    // GET Vault by ID
+    //Get User Vaults(Get Vaults for the logged in user)
 
-    [HttpGet("{id}")]
-    public ActionResult<Vault> GetVault(int id)
+    [HttpGet]
+    public IEnumerable<Vault> GetVault()
     {
-      Vault result = _repo.GetVaultById(id);
-      if (result != null)
-      {
-        return Ok(result);
-      }
-      return BadRequest();
+      string uid = HttpContext.User.Identity.Name;
+      return _repo.GetVaultById(uid);
+
     }
+
 
     //Edit Vault
 
@@ -72,8 +70,17 @@ namespace Keepr.Controllers
       return NotFound();
     }
 
-
-
+    //Get Vault
+    [HttpGet("{id}")]
+    public ActionResult<Vault> GetVault(int id)
+    {
+      Vault result = _repo.GetOneVault(id);
+      if (result != null)
+      {
+        return Ok(result);
+      }
+      return BadRequest();
+    }
   }
 }
 

@@ -41,10 +41,9 @@ namespace Keepr.Controllers
 
     //Get Keeps By Vault ID
     [HttpGet("{id}")]
-    public IEnumerable<Keep> GetKeepsByVaultId(int id)
+    public IEnumerable<Keep> Get(int id)
     {
-      return _repo.GetKeepsByVaultId(id);
-
+      return _repo.GetOneVault(id);
     }
   }
 }
