@@ -63,7 +63,7 @@
       },
       createVaultKeep(vaultId) {
         let payload = { vaultId, keepId: this.keep.id }
-        incrementKeepsCount();
+        this.incrementKeepsCount();
         this.$store.dispatch('postVaultKeep', payload)
       },
       editKeepViews() {
@@ -89,7 +89,6 @@
           views: this.keep.views,
           keeps: this.keep.keeps + 1
         }
-        debugger
         this.$store.dispatch("editKeep", payload)
       }
     }
