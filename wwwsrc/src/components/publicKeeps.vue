@@ -1,18 +1,34 @@
 <template>
   <div class="row d-flex justify-content-around">
-    <div v-for="keep in Keeps" class="col-3 d-flex justify-content-center mt-5">
-      <div class="card" style="width: 12rem;">
-        <img class="card-img-top" :src="keep.img" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{keep.name}}</h5>
-          <li class="list-group-item">Keeps: {{keep.keeps}} </li>
-          <li class="list-group-item">Views: {{keep.views}}</li>
-          <li class="list-group-item">Shares:{{keep.shares}}</li>
+
+    <div v-for="keep in Keeps" class="d-flex justify-content-center mt-5">
+      <div class="d-flex">
+        <div>
+          <div class="card" style="width: 18rem">
+            <li class="list-group-item bg-warning">{{keep.name}} </li>
+            <img class="card-img-top" :src="keep.img" alt="Card image cap">
+            <li class="list-group-item d-flex justify-content-around">
+              <!-- Keeps: {{keep.keeps}} Views: {{keep.views}} Shares: {{keep.shares}}  -->
+              <div class="card pl-1 pr-1">Keeps: {{keep.keeps}}</div>
+              <div class="card pl-1 pr-1">Views: {{keep.views}}</div>
+              <div class="card pl-1 pr-1">Shares: {{keep.shares}}</div>
+            </li>
+            <!-- <li class="list-group-item">Views: {{keep.views}}</li>
+            <li class="list-group-item">Shares:{{keep.shares}}</li> -->
+            <li class="list-group-item d-flex justify-content-around">
+              <!-- <i class="fas fa-folder-plus fa-lg" @click="addKeepToVault(keep.id)"></i> -->
+              <i class="far fa-eye" @click="goToKeepView(keep.id)"></i>
+            </li>
+          </div>
         </div>
       </div>
     </div>
 
   </div>
+
+
+
+
 </template>
 
 <script>
@@ -20,7 +36,6 @@
     name: 'publickeeps',
     data() {
       return {
-
       }
     },
     computed: {
@@ -30,7 +45,14 @@
         console.log(this.$store.state.publicKeeps);
       }
     },
-    methods: {}
+    methods: {
+      addKeepToVault(id) {
+        console.log(id)
+      },
+      goToKeepView(keepid) {
+        this.$router.push({ name: 'keep', params: { keepid: keepid } })
+      }
+    }
   }
 
 </script>

@@ -21,21 +21,12 @@ namespace Keepr.Repositories
     public Keep AddKeep(Keep newKeep)
     {
       int id = _db.ExecuteScalar<int>(@"
-      INSERT INTO Keeps(name, description, userId, img, isPrivate)
-      VALUES (@Name, @Description, @UserId, @Img, @IsPrivate)
+      INSERT INTO Keeps(name, description, UserId, img, isPrivate)
+      VALUES (@Name, @Description, @UserId, @Img, @IsPrivate);
+      SELECT LAST_INSERT_ID();
       ", newKeep);
       newKeep.Id = id;
       return newKeep;
-      // {
-      //   Name = newKeep.Name,
-      //   Description = newKeep.Description,
-      //   UserId = newKeep.UserId,
-      //   Img = newKeep.Img,
-      //   IsPrivate = newKeep.IsPrivate,
-      //   Views = newKeep.Views,
-      //   Shares = newKeep.Shares,
-      //   Keeps = newKeep.Keeps
-      // };
     }
 
     //Delete Keep
@@ -50,28 +41,28 @@ namespace Keepr.Repositories
     //Get User Keeps
     public IEnumerable<Keep> GetKeepByUserId(string id)
     {
-      return _db.Query<Keep>($"SELECT * FROM Keeps WHERE userId = @id", new { id });
+      return _db.Query<Keep>($"SELECT * FROM Keeps WHERE userid = @id", new { id });
     }
 
 
     //Edit Keep
-    public Keep EditKeep(int id, Keep newkeep)
+    public int EditKeep(Keep newkeep)
     {
       try
       {
-        return _db.QueryFirstOrDefault<Keep>($@"
+        //runs changes on table and in this case it will return a keep
+        return _db.Execute($@"
           UPDATE Keeps SET
-            Views = @Views,
-            Shares = @Shares,
-            Keeps=@Keeps
-          WHERE Id = @Id;
-          SELECT * FROM Keeps WHERE id = @Id;
+            views = @Views,
+            shares = @Shares,
+            keeps=@Keeps
+          WHERE id = @Id;
         ", newkeep);
       }
       catch (Exception ex)
       {
         Console.WriteLine(ex);
-        return null;
+        return 0;
       }
     }
 

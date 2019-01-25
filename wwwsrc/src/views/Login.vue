@@ -15,10 +15,13 @@
             <p v-if="loginForm">No account Click to Register</p>
             <p v-else>Already have an account click to Login</p>
         </div>
+        <publicKeeps></publicKeeps>
     </div>
+
 </template>
 
 <script>
+    import publicKeeps from '@/components/publicKeeps.vue'
     export default {
         name: "login",
         data() {
@@ -43,6 +46,12 @@
                 // console.log("trying to login!")
                 this.$store.dispatch("login", this.creds);
             }
+        },
+        mounted() {
+            this.$store.dispatch('getPublicKeeps');
+        },
+        components: {
+            publicKeeps
         }
     };
 </script>

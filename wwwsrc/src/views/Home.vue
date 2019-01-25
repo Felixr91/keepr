@@ -1,14 +1,13 @@
 <template>
   <div class="home">
-    <nav></nav>
-    <h1>Keepr</h1>
+    <!-- <navigation></navigation> -->
     <publicKeeps></publicKeeps>
   </div>
 </template>
 
 <script>
   import publicKeeps from '@/components/publicKeeps.vue'
-  import nav from '@/components/nav.vue'
+  import navigation from '@/components/navigation.vue'
   export default {
     name: "home",
     data() {
@@ -22,10 +21,11 @@
       //   this.$router.push({ name: "login" });
       // }
       this.$store.dispatch('getPublicKeeps');
+      this.$store.dispatch('getUsersVaults');
     },
     components: {
       publicKeeps,
-      nav
+      navigation
     },
     computed: {
       // getKeeps() {

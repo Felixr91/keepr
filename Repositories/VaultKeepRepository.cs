@@ -26,11 +26,11 @@ namespace Keepr.Repositories
     }
 
     // Delete VaultKeep
-    public bool DeleteVaultKeep(int id)
+    public bool DeleteVaultKeep(VaultKeep vaultkeep)
     {
       int success = _db.Execute(@"
-      DELETE FROM VaultKeeps WHERE (id = @id);
-      ", new { id });
+      DELETE FROM VaultKeeps WHERE keepId = @KeepId AND vaultId = @vaultId;
+      ", vaultkeep);
       return success != 0;
     }
 
@@ -40,7 +40,7 @@ namespace Keepr.Repositories
       return _db.Query<Keep>(@"
         SELECT * FROM vaultkeeps vk
         INNER JOIN keeps k ON k.id = vk.keepId 
-        WHERE (vaultId = @Id); 
+        WHERE (vaultId = @id); 
       ", new { id });
     }
   }

@@ -53,7 +53,7 @@ namespace Keepr.Repositories
     // GET Individual Vault (check that you are the owner)
     public Vault GetOneVault(int id)
     {
-      return _db.QueryFirstOrDefault<Vault>($"SELECT * FROM Vaults WHERE userid = @id", new { id });
+      return _db.QueryFirstOrDefault<Vault>($"SELECT * FROM Vaults WHERE id = @id", new { id });
     }
 
 

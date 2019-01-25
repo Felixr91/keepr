@@ -66,10 +66,15 @@ namespace Keepr.Repositories
       return user;
     }
 
+    // public User Logout()
+    // {
+
+    // }
 
     //Update   u
     //CHANGE PASS u
     //DELETE   D
+
 
 
 

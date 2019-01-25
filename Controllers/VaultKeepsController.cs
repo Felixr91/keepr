@@ -20,19 +20,20 @@ namespace Keepr.Controllers
 
     //Create VaultKeep
     [HttpPost]
-    public VaultKeep AddVaultKeep([FromBody]VaultKeep val)
+    public ActionResult AddVaultKeep([FromBody]VaultKeep val)
     {
-
+      val.UserId = HttpContext.User.Identity.Name;
       VaultKeep result = _repo.AddVaultKeep(val);
-      return result;
+      return Ok();
       // return Created("/api/VaultKeep/" + result.Id, result);
     }
 
     //Delete VaultKeep
-    [HttpDelete("{id}")]
-    public ActionResult<string> DeleteVaultKeep(int id)
+    [HttpPut]
+    public ActionResult<string> DeleteVaultKeep([FromBody] VaultKeep vaultkeep)
     {
-      if (_repo.DeleteVaultKeep(id))
+      var result = _repo.DeleteVaultKeep(vaultkeep);
+      if (result != false)
       {
         return Ok("Successfully deleted!");
       }

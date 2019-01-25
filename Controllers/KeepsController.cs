@@ -19,7 +19,7 @@ namespace Keepr.Controllers
       _repo = repo;
     }
 
-    //Add Keep
+    //Create Keep
     [Authorize]
     [HttpPost]
     public ActionResult<Keep> Post([FromBody]Keep val)
@@ -47,7 +47,7 @@ namespace Keepr.Controllers
     //Get User Keeps
     [Authorize]
     [HttpGet("user")]
-    public IEnumerable<Keep> Get()
+    public IEnumerable<Keep> GetKeeps()
     {
       string uid = HttpContext.User.Identity.Name;
       return _repo.GetKeepByUserId(uid);
@@ -59,9 +59,6 @@ namespace Keepr.Controllers
       // return BadRequest();
 
     }
-
-
-
     [HttpGet]
 
     //Get Public Keeps
@@ -73,15 +70,15 @@ namespace Keepr.Controllers
 
     //Edit Keep by ID
 
-    [HttpPut("{id}")]
-    public ActionResult<Keep> EditKeep(int id, [FromBody] Keep value)
+    [HttpPut]
+    public ActionResult<string> EditKeep([FromBody] Keep value)
     {
-      Keep result = _repo.EditKeep(id, value);
-      if (result != null)
+      int result = _repo.EditKeep(value);
+      if (result == 1)
       {
-        return Ok(result);
+        return Ok("success");
       }
-      return NotFound();
+      return BadRequest("Unsuccessful edit");
     }
 
   }
