@@ -2,29 +2,25 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
       <!-- {{keeps}} -->
-      <div class="card" style="width: 80%;">
+      <div class="card mt-5 mb-5" style="width: 20rem;">
+        <div class="card-header bg-warning">
+          {{keep.name}}
+        </div>
         <img class="card-img-top" :src="keep.img" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{keep.name}}</h5>
-          <!-- <p class="card-text">Select a vault to add it to below: </p> -->
-          <a href="#" class="btn btn-primary" @click="toggleShowVaults">+ Vault</a>
-          <div class="d-flex justify-content-center">
-            <!-- <div v-if="showVaults"> -->
-            <div class="card mt-5 mb-5" style="width: 12rem;">
-              <div v-for="vault in vaults">
-                <li class="list-group-item d-flex justify-content-between">
-                  {{vault.name}}
-                  <i class="fas fa-plus-circle" @click="createVaultKeep(vault.id)"></i>
-                </li>
-                <ul class="list-group list-group-flush"></ul>
-              </div>
+        <li class="list-group-item text-center">
+          Add this to a vault!
+        </li>
+        <div class="d-flex justify-content-center bg-warning">
+          <div class="mt-1 mb-1" style="width: 12rem;">
+            <div v-for="vault in vaults">
+              <li class="list-group-item d-flex justify-content-between">
+                {{vault.name}}
+                <i class="fas fa-plus-circle" @click="createVaultKeep(vault.id)"></i>
+              </li>
             </div>
-            <!-- </div> -->
           </div>
         </div>
       </div>
-
-
     </div>
 
   </div>

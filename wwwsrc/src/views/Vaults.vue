@@ -2,7 +2,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col-12">
       <!-- Modal Form Vaults -->
-      <form @submit.prevent="addVault">
+      <form @submit.prevent="addVault" id="modal">
         <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -33,7 +33,7 @@
         </div>
       </form>
       <div class="text-center">
-        <a href="" class="btn btn-default btn-rounded mb-4 mt-4" data-toggle="modal" data-target="#modalLoginForm">Make
+        <a href="" class="btn btn-success btn-rounded mt-4" data-toggle="modal" data-target="#modalLoginForm">Make
           a
           New
           Vault!</a>
@@ -42,20 +42,23 @@
     <!-- End of Modal Log in form -->
 
     <div class="row">
-      <div style="width: 18rem;">
-        <ul class="list-group list-group-flush">
-          <div v-for="vault in Vaults">
-            <div class="card d-flex justify-content-between mb-2">
-              <li class="list-group-item">
-                {{vault.name}}
-              </li>
-              <li class="list-group-item">
-                <p class="mb-0 text-danger" @click="deleteVault(vault.id)">Delete</p>
-              </li>
-              <button type="button" class="btn btn-light" @click="goToVaultKeeps(vault.id)">Open</button>
-            </div>
-          </div>
-        </ul>
+      <div class="card" style="width: 100%">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Vault Name</th>
+              <th scope="col">Delete</th>
+              <th scope="col">Open</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="vault in Vaults">
+              <td>{{vault.name}}</td>
+              <td><i class="fas fa-dumpster-fire" @click="deleteVault(vault.id)"></i></td>
+              <td><i class="fas fa-box-open" @click="goToVaultKeeps(vault.id)"></i></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -95,6 +98,7 @@
       addVault() {
         this.$store.dispatch('addVault', this.newVault);
         this.adding = !this.adding;
+        this.$router.push({ name: 'vaults' })
       },
       deleteVault(vaultid) {
         this.$store.dispatch('deleteVault', vaultid);

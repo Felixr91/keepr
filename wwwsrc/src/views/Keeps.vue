@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="">
 
     <!-- Keeps Modal -->
     <form @submit.prevent="addKeep">
@@ -56,14 +56,14 @@
     </form>
     <div class="col-12">
       <div class="text-center">
-        <a href="" class="btn btn-default btn-rounded mt-4 mb-4" data-toggle="modal" data-target="#orangeModalSubscription">Create
+        <a href="" class="btn btn-success btn-rounded mt-4" data-toggle="modal" data-target="#orangeModalSubscription">Create
           Keep!</a>
       </div>
     </div>
     <!-- End of modal form -->
 
 
-    <div class="row">
+    <div class="row pl-2 pr-2">
       <div class="col-12 d-flex justify-content-around">
         <div v-for="keep in keeps" class="d-flex justify-content-around mt-5">
           <div>

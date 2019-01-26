@@ -1,14 +1,16 @@
 <template>
   <div class="row d-flex justify-content-around">
-    <div v-for=" vaultkeep in VaultKeeps" class="d-flex justify-content-around">
-      <div class="d-flex">
-        <div class="card" style="width: 12rem;">
-          <img class="card-img-top" :src="vaultkeep.img" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">{{vaultkeep.name}}</h5>
-            <p class="card-text">{{vaultkeep.shares}}</p>
-            <a href="#" class="btn btn-primary" @click="deleteVaultKeep(vaultkeep.id)">Delete</a>
+    <div v-for=" vaultkeep in VaultKeeps" class="justify-content-around">
+      <div class="d-flex card mt-5">
+        <div style="width: 18rem;">
+          <div class="card-header">
+            {{vaultkeep.name}}
           </div>
+          <img class="card-img-top" :src="vaultkeep.img" alt="Card image cap">
+          <ul class="list-group list-group-flush">
+            <!-- <li class="list-group-item">Shares: {{vaultkeep.shares}}</li> -->
+            <a href="#" class="btn btn-danger" @click="deleteVaultKeep(vaultkeep.id)">Delete</a>
+          </ul>
         </div>
       </div>
     </div>
