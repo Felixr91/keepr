@@ -1,52 +1,58 @@
 <template>
   <!--Navbar-->
 
-  <nav class="navbar navbar-light amber lighten-4 mb-4">
-    <!-- Navbar brand -->
-    <div class="d-flex">
-      <a class="navbar-brand logo-font ml-2" href="#">Keepr <i class="fas fa-archive"></i></a>
+  <div class="row no-gutters">
+    <div class="col-12">
+      <nav class="navbar navbar-light amber lighten-4 mb-4">
+        <!-- Navbar brand -->
+
+        <div class="d-flex justify-content-start">
+          <a class="navbar-brand logo-font ml-2" href="#" @click="goHome()">Keepr <i class="fas fa-archive"></i></a>
+        </div>
+        <!-- Collapse button -->
+        <button class="navbar-toggler first-button btn d-flex justify-content-end" onclick="this.blur();" type="button"
+          data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <div class="animated-icon1"><span></span><span></span><span></span></div>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent20">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
+                aria-expanded="false" aria-label="Toggle navigation" @click="goHome()">Home
+                <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" v-if="isLoggedIn()">
+              <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
+                aria-expanded="false" aria-label="Toggle navigation" @click="logout()">Logout</a>
+            </li>
+            <li class="nav-item" v-else>
+              <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
+                aria-expanded="false" aria-label="Toggle navigation" @click="loginScreen()">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
+                aria-expanded="false" aria-label="Toggle navigation" @click="goToUserVaults()">My
+                Vaults</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
+                aria-expanded="false" aria-label="Toggle navigation" @click="seeMyKeeps()">My
+                Keeps</a>
+            </li>
+          </ul>
+          <!-- Links -->
+
+        </div>
+        <!-- Collapsible content -->
+
+      </nav>
     </div>
-    <!-- Collapse button -->
-    <button class="navbar-toggler first-button btn" onclick="this.blur();" type="button" data-toggle="collapse"
-      data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon1"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent20">
-
-      <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
-            aria-expanded="false" aria-label="Toggle navigation" @click="goHome()">Home
-            <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item" v-if="isLoggedIn()">
-          <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
-            aria-expanded="false" aria-label="Toggle navigation" @click="logout()">Logout</a>
-        </li>
-        <li class="nav-item" v-else>
-          <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
-            aria-expanded="false" aria-label="Toggle navigation" @click="loginScreen()">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
-            aria-expanded="false" aria-label="Toggle navigation" @click="goToUserVaults()">My
-            Vaults</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
-            aria-expanded="false" aria-label="Toggle navigation" @click="seeMyKeeps()">My
-            Keeps</a>
-        </li>
-      </ul>
-      <!-- Links -->
-
-    </div>
-    <!-- Collapsible content -->
-
-  </nav>
+  </div>
 
 </template>
 

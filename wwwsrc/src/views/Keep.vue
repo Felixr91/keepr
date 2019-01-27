@@ -2,18 +2,18 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
       <!-- {{keeps}} -->
-      <div class="card mt-5 mb-5" style="width: 20rem;">
-        <div class="card-header bg-warning">
-          {{keep.name}}
-        </div>
-        <img class="card-img-top" :src="keep.img" alt="Card image cap">
-        <li class="list-group-item text-center">
+      <div class="card mt-5 mb-5">
+        <!-- <div class=" card-header bg-warning">
+        {{keep.name}}
+      </div> -->
+        <img class="card-img-top" style="height: 100%;" :src="keep.img" alt="Card image cap">
+        <li class="list-group-item text-center bg-warning">
           Add this to a vault!
         </li>
-        <div class="d-flex justify-content-center bg-warning">
-          <div class="mt-1 mb-1" style="width: 12rem;">
-            <div v-for="vault in vaults">
-              <li class="list-group-item d-flex justify-content-between">
+        <div class="d-flex justify-content-center">
+          <div class="mt-1 mb-1">
+            <div v-for="vault in vaults" class="mb-3 mt-2">
+              <li class="list-group-item">
                 {{vault.name}}
                 <i class="fas fa-plus-circle" @click="createVaultKeep(vault.id)"></i>
               </li>

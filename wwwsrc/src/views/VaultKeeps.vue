@@ -6,8 +6,9 @@
           <div class="card-header">
             {{vaultkeep.name}}
           </div>
-          <img class="card-img-top" :src="vaultkeep.img" alt="Card image cap">
-          <ul class="list-group list-group-flush">
+          <img class="card-img-top" :src="vaultkeep.img" alt="Card image cap" @click="goToKeepView(vaultkeep.id)">
+          <ul class="
+            list-group list-group-flush">
             <!-- <li class="list-group-item">Shares: {{vaultkeep.shares}}</li> -->
             <a href="#" class="btn btn-danger" @click="deleteVaultKeep(vaultkeep.id)">Delete</a>
           </ul>
@@ -46,6 +47,9 @@
 
         // let payload = { vaultid: this.ActiveVault, keepid }
         this.$store.dispatch('deleteVaultKeep', { keepId, vaultId: this.ActiveVault })
+      },
+      goToKeepView(keepid) {
+        this.$router.push({ name: 'keep', params: { keepid: keepid } })
       }
     }
   }

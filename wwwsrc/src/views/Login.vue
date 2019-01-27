@@ -36,7 +36,7 @@
                         <input type="password" v-model="newUser.password" name="password" id="password" class="form-control"
                             aria-describedby="emailHelp" placeholder="Enter Password">
                     </div>
-                    <button class="btn btn-primary mb-3" type="submit">Login</button>
+                    <button class="btn btn-primary mb-3" type="submit">Sign Up!</button>
 
                     <!-- <input type="text" v-model="newUser.username" placeholder="name">
                     <input type="email" v-model="newUser.email" placeholder="email">

@@ -5,8 +5,8 @@
       <form @submit.prevent="addVault" id="modal">
         <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
+          <div class="modal-dialog d-flex justify-content-center" role="document">
+            <div class="modal-content mt-4">
               <div class="modal-header text-center">
                 <h3 class="logo-font">Keepr <i class="fas fa-archive"></i></h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -15,18 +15,18 @@
               </div>
               <h4 class="modal-title w-100 font-weight-bold mt-3">New Vault!</h4>
               <div class="modal-body mx-3">
-                <div class="md-form mb-5">
+                <div class="md-form mb-1">
                   <input type="text" v-model="newVault.name" id="defaultForm-email" class="form-control validate">
                   <label data-error="wrong" data-success="right" for="defaultForm-email">Vault Name</label>
                 </div>
 
-                <div class="md-form mb-4">
+                <div class="md-form mb-1">
                   <input type="text" v-model="newVault.description" id="defaultForm-email" class="form-control validate">
                   <label data-error="wrong" data-success="right" for="defaultForm-email">Vault Description</label>
                 </div>
               </div>
               <div class="d-flex justify-content-center">
-                <button class="btn btn-primary mt-3 mb-4" style="width: 5rem" type="submit">Create</button>
+                <button class="btn btn-primary mb-4" style="width: 5rem" type="submit">Create</button>
               </div>
             </div>
           </div>
@@ -41,26 +41,23 @@
     </div>
     <!-- End of Modal Log in form -->
 
-    <div class="row">
-      <div class="card" style="width: 100%">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Vault Name</th>
-              <th scope="col">Delete</th>
-              <th scope="col">Open</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="vault in Vaults">
-              <td>{{vault.name}}</td>
-              <td><i class="fas fa-dumpster-fire" @click="deleteVault(vault.id)"></i></td>
-              <td><i class="fas fa-box-open" @click="goToVaultKeeps(vault.id)"></i></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+
+    <table class="table table-striped mt-5">
+      <thead>
+        <tr>
+          <th scope="col">Vault Name</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Open</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="vault in Vaults">
+          <td>{{vault.name}}</td>
+          <td><i class="fas fa-dumpster-fire" @click="deleteVault(vault.id)"></i></td>
+          <td><i class="fas fa-box-open" @click="goToVaultKeeps(vault.id)"></i></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -109,6 +106,9 @@
 </script>
 
 <style>
-
-
+  @media only screen and (max-width: 600px) {
+    .modal-content {
+      width: 80%;
+    }
+  }
 </style>

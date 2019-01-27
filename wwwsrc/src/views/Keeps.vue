@@ -1,85 +1,78 @@
 <template>
-  <div class="">
-
-    <!-- Keeps Modal -->
-    <form @submit.prevent="addKeep">
-      <div class="modal fade" id="orangeModalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-notify modal-warning" role="document">
-          <!--Content-->
-          <div class="modal-content">
-            <!--Header-->
-            <div class="modal-header text-center">
-              <h3 class="logo-font">Keepr <i class="fas fa-archive"></i></h3>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" class="white-text">&times;</span>
-              </button>
-            </div>
-            <h4 class="modal-title w-100 font-weight-bold mt-3">New Keep!</h4>
-            <!--Body-->
-            <div class="modal-body">
-              <div class="md-form mb-5">
-                <input type="text" v-model="newKeep.name" id="form3" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="form3">Keep Name</label>
+  <div class="row d-flex justify-content-center">
+    <div class="col-12">
+      <!-- Keeps Modal -->
+      <form @submit.prevent="addKeep" id="modal">
+        <div class="modal fade" id="orangeModalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog d-flex justify-content-center" role="document">
+            <!--Content-->
+            <div class="modal-content">
+              <!--Header-->
+              <div class="modal-header text-center">
+                <h3 class="logo-font">Keepr <i class="fas fa-archive"></i></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
               </div>
+              <h4 class="modal-title w-100 font-weight-bold mt-3">New Keep!</h4>
+              <!--Body-->
+              <div class="modal-body">
+                <div class="md-form mb-1">
+                  <input type="text" v-model="newKeep.name" id="form3" class="form-control validate">
+                  <label data-error="wrong" data-success="right" for="form3">Keep Name</label>
+                </div>
 
-              <div class="md-form mb-5">
-                <input type="text" v-model="newKeep.img" id="form2" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="form2">Image Link</label>
-              </div>
+                <div class="md-form mb-1">
+                  <input type="text" v-model="newKeep.img" id="form2" class="form-control validate">
+                  <label data-error="wrong" data-success="right" for="form2">Image Link</label>
+                </div>
 
-              <div class="md-form">
-                <input type="text" v-model="newKeep.description" id="form2" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="form2">Description</label>
-              </div>
+                <div class="md-form">
+                  <input type="text" v-model="newKeep.description" id="form2" class="form-control validate">
+                  <label data-error="wrong" data-success="right" for="form2">Description</label>
+                </div>
 
-              <!-- Checkbox -->
-              <div class="col-12 d-flex justify-content-center mt-3">
-                <div class="card d-flex justify-content-center bg-light" style="width: 6rem">
-                  <div class="mb-2 mt-2">
-                    <p>Private</p>
-                    <input type="checkbox" id="checkbox" v-model="newKeep.isPrivate">
-                    <label for="checkbox"></label>
+                <!-- Checkbox -->
+                <div class="col-12 d-flex justify-content-center mt-3">
+                  <div class="card d-flex justify-content-center bg-light" style="width: 5rem">
+                    <div class="">
+                      <p>Private</p>
+                      <input type="checkbox" id="checkbox" v-model="newKeep.isPrivate">
+                      <label for="checkbox"></label>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!--Footer-->
-            <div class="d-flex justify-content-center">
-              <button class="btn btn-primary mt-3 mb-4" style="width: 5rem" type="submit">Create</button>
+              <!--Footer-->
+              <div class="d-flex justify-content-center">
+                <button class="btn btn-primary mt-3 mb-4" style="width: 5rem" type="submit">Create</button>
+              </div>
             </div>
+            <!--/.Content-->
           </div>
-          <!--/.Content-->
         </div>
-      </div>
-    </form>
-    <div class="col-12">
-      <div class="text-center">
-        <a href="" class="btn btn-success btn-rounded mt-4" data-toggle="modal" data-target="#orangeModalSubscription">Create
-          Keep!</a>
+      </form>
+      <div class="col-12">
+        <div class="text-center">
+          <a href="" class="btn btn-success btn-rounded mt-4 mb-4" data-toggle="modal" data-target="#orangeModalSubscription">Create
+            Keep!</a>
+        </div>
       </div>
     </div>
     <!-- End of modal form -->
 
-
-    <div class="row pl-2 pr-2">
-      <div class="col-12 d-flex justify-content-around">
-        <div v-for="keep in keeps" class="d-flex justify-content-around mt-5">
-          <div>
-            <div class="card" style="width: 18rem">
-              <li class="list-group-item bg-warning">{{keep.name}} </li>
-              <img class="card-img-top" :src="keep.img" alt="Card image cap">
-              <li class="list-group-item d-flex justify-content-around">
-                <div class="card pl-1 pr-1">Keeps: {{keep.keeps}}</div>
-                <div class="card pl-1 pr-1">Views: {{keep.views}}</div>
-                <div class="card pl-1 pr-1">Shares: {{keep.shares}}</div>
-              </li>
-              <li class="list-group-item d-flex justify-content-around">
-                <!-- <i class="fas fa-folder-plus fa-lg" @click="addKeepToVault(keep.id)"></i> -->
-                <i class="fas fa-trash-alt" @click="deleteKeep(keep.id)"></i>
-                <i class="far fa-eye" @click="goToKeepView(keep.id)"></i>
-              </li>
+    <div class="d-flex justify-content-center">
+      <div class="card-columns" style="width: 95%">
+        <div v-for="keep in keeps" class="d-flex justify-content-around">
+          <div class="col pl-0 pr-0">
+            <div class="card">
+              <div class="container hover-wrapper">
+                <img class="card-img-top" :src="keep.img" @click="goToKeepView(keep.id)">
+                <div class="img-info bottom-left pl-1 pr-1 hover-show"><i class="fas fa-trash-alt" @click="deleteKeep(keep.id)"></i></div>
+                </li>
+              </div>
             </div>
           </div>
         </div>
@@ -124,12 +117,17 @@
       },
       deleteKeep(keepId) {
         this.$store.dispatch('deleteKeep', keepId)
+
+        // this.$router.push({ name: 'keeps' })
       }
     }
   }
 </script>
 
 <style>
-
-
+  @media only screen and (max-width: 600px) {
+    .modal-content {
+      width: 80%;
+    }
+  }
 </style>

@@ -144,6 +144,7 @@ export default new Vuex.Store({
         .then(res => {
           console.log("Keep Deleted!")
         })
+      // dispatch("myKeeps")
     },
     getUsersKeeps({ commit, dispatch }) {
       api.get('/keeps/user')
