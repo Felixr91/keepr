@@ -1,12 +1,13 @@
 <template>
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
-      <!-- {{keeps}} -->
+      <!-- {{keep}} -->
       <div class="card mt-5 mb-5">
-        <!-- <div class=" card-header bg-warning">
-        {{keep.name}}
-      </div> -->
-        <img class="card-img-top" style="height: 100%;" :src="keep.img" alt="Card image cap">
+        <div class="container hover-wrapper">
+          <img class="card-img-top" :src="keep.img" alt="Card image cap">
+          <div class="img-info bottom-left pl-1 pr-1 hover-show">{{keep.name}}</div>
+          <div class="img-info bottom-right pl-1 pr-1 hover-show">{{keep.description}}</div>
+        </div>
         <li class="list-group-item text-center bg-warning">
           Add this to a vault!
         </li>
@@ -35,9 +36,6 @@
       return {}
     },
     computed: {
-      // keepid() {
-      //   return this.$route.params.keepid
-      // },
       keep() {
         return this.$store.state.publicKeeps.find(k => k.id == this.keepid) || {}
       },
@@ -93,6 +91,23 @@
 </script>
 
 <style>
+  .bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+  }
 
+  .bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+  }
 
+  .hover-wrapper:hover .hover-show {
+    display: block;
+  }
+
+  .hover-wrapper .hover-show {
+    display: none;
+  }
 </style>

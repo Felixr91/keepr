@@ -1,23 +1,23 @@
 <template>
   <!--Navbar-->
 
-  <div class="row no-gutters">
+  <div class="row container-fluid no-gutters">
     <div class="col-12">
-      <nav class="navbar navbar-light amber lighten-4 mb-4">
+      <b-navbar class="navbar align-items-start navbar-light amber lighten-4 header bg-nav-white" fixed="top">
         <!-- Navbar brand -->
 
         <div class="d-flex justify-content-start">
-          <a class="navbar-brand logo-font ml-2" href="#" @click="goHome()">Keepr <i class="fas fa-archive"></i></a>
+          <a class="navbar-brand logo-font" href="#" @click="goHome()">Keepr <i class="fas fa-archive"></i></a>
         </div>
         <!-- Collapse button -->
-        <button class="navbar-toggler first-button btn d-flex justify-content-end" onclick="this.blur();" type="button"
+        <button class="navbar-toggler first-button btn d-flex justify-content-end mr-2" onclick="this.blur();" type="button"
           data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
           aria-expanded="false" aria-label="Toggle navigation">
           <div class="animated-icon1"><span></span><span></span><span></span></div>
         </button>
 
         <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent20">
+        <div class="collapse navbar-collapse bg-white-collapse" id="navbarSupportedContent20">
 
           <!-- Links -->
           <ul class="navbar-nav mr-auto">
@@ -50,7 +50,7 @@
         </div>
         <!-- Collapsible content -->
 
-      </nav>
+      </b-navbar>
     </div>
   </div>
 
@@ -114,18 +114,36 @@
 </script>
 
 <style>
-  /* .nav-color {
-    background-color: rgb(181, 250, 250);
-  } */
+  .bg-nav-white {
+    background-color: white;
+  }
+
+  .bg-white-collapse {
+    background-color: white;
+    margin-left: -10px;
+  }
+
+  .header {
+    position: fixed;
+    /* fixing the position takes it out of html flow - knows
+                   nothing about where to locate itself except by browser
+                   coordinates */
+    left: 0;
+    /* top left corner should start at leftmost spot */
+    top: 0;
+    /* top left corner should start at topmost spot */
+    width: 100vw;
+    /* take up the full browser width */
+    z-index: 200;
+    /* high z index so other content scrolls underneath */
+    height: 70px;
+    /* define height for content */
+  }
 
   .logo-font {
     /* font-family: 'Fredoka One', cursive; */
     font-size: 2rem;
   }
-
-  /* .nav-bar {
-    background-color: rgb(232, 255, 247);
-  } */
 
   /* Icon 1 */
   .btn:focus {
@@ -138,8 +156,6 @@
     width: 30px;
     height: 30px;
     position: relative;
-    /* padding-top: 10px;
-    padding-bottom: 2px; */
     margin-top: 7px;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);

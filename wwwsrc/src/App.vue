@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <navigation></navigation>
+    <div style="margin-top: 70px;"></div>
     <router-view />
   </div>
 </template>
