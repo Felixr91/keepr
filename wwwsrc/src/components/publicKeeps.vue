@@ -14,10 +14,6 @@
       </div>
     </div>
   </div>
-
-
-
-
 </template>
 
 <script>
@@ -91,6 +87,39 @@
   @media only screen and (max-width: 575px) {
     .img-info {
       font-size: 15px;
+    }
+  }
+
+  /* I want 300px here but it breaks for some reason */
+  @media (min-width: 580px) {
+    .card-columns {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 48em) {
+    .card-columns {
+      -webkit-column-count: 3;
+      -moz-column-count: 3;
+      column-count: 3;
+    }
+  }
+
+  @media (min-width: 62em) {
+    .card-columns {
+      -webkit-column-count: 4;
+      -moz-column-count: 4;
+      column-count: 4;
+    }
+  }
+
+  @media (min-width: 75em) {
+    .card-columns {
+      -webkit-column-count: 5;
+      -moz-column-count: 5;
+      column-count: 5;
     }
   }
 </style>

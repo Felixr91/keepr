@@ -47,7 +47,7 @@
 
               <!--Footer-->
               <div class="d-flex justify-content-center">
-                <button class="btn btn-primary mt-3 mb-4" style="width: 5rem" type="submit">Create</button>
+                <button class="btn btn-primary mt-3 mb-4 close-on-create" style="width: 5rem" @click="submitKeep">Create</button>
               </div>
             </div>
             <!--/.Content-->
@@ -109,7 +109,6 @@
         } else {
           this.newKeep.isPrivate = 0
         }
-        // this.newKeep.UserId = this.$store.state.user.id
         this.$store.dispatch('addKeep', this.newKeep);
       },
       goToKeepView(keepid) {
@@ -117,8 +116,9 @@
       },
       deleteKeep(keepId) {
         this.$store.dispatch('deleteKeep', keepId)
-
-        // this.$router.push({ name: 'keeps' })
+      },
+      submitKeep() {
+        this.$store.dispatch('addKeep', this.newKeep);
       }
     }
   }

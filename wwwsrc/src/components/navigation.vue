@@ -64,14 +64,7 @@
         loggedIn: false
       }
     },
-    computed: {
-      // isLoggedIn() {
-      //   console.log(this.$store.state.user)
-      //   if (this.$store.state.user) {
-      //     this.loggedIn == true;
-      //   }
-      // }
-    },
+    computed: {},
     methods: {
       goToUserVaults() {
         console.log(this.$store.state.user.id);
@@ -121,6 +114,7 @@
   .bg-white-collapse {
     background-color: white;
     margin-left: -10px;
+    margin-right: -10px;
   }
 
   .header {

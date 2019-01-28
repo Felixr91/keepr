@@ -103,9 +103,6 @@ export default new Vuex.Store({
     goHome() {
       router.push({ name: 'home' })
     },
-    myKeeps() {
-      router.push({ name: 'keeps' })
-    },
     getUsersVaults({ commit, dispatch }) {
       api.get('/vaults/')
         .then(res => {
@@ -121,11 +118,18 @@ export default new Vuex.Store({
         })
       router.push({ name: 'vaultkeeps', params: { vaultid: vaultid } })
     },
-    goToKeepView({ commit, dispatch }, keepid) {
-
+    myKeeps({ commit }) {
+      api.get('/keeps/user')
+        .then(res => {
+          commit("setAllActiveUsersKeeps", res.data)
+        })
+      router.push({ name: 'keeps' })
     },
     addVault({ commit, dispatch }, payload) {
       api.post('/vaults/', payload)
+        .then(res => {
+          dispatch('getUsersVaults')
+        })
     },
     addKeep({ commit, dispatch }, payload) {
       api.post('/keeps/', payload)
@@ -143,8 +147,16 @@ export default new Vuex.Store({
       api.delete('/keeps/' + keepId)
         .then(res => {
           console.log("Keep Deleted!")
+          dispatch('myKeeps')
+          // window.location.reload()
         })
-      // dispatch("myKeeps")
+    },
+    deleteVaultKeep({ commit, dispatch }, vaultkeep) {
+      api.put('/vaultkeeps/', vaultkeep)
+        .then(res => {
+          console.log("vaultkeep deleted!")
+          dispatch('goToVaultKeeps', vaultkeep.vaultId)
+        })
     },
     getUsersKeeps({ commit, dispatch }) {
       api.get('/keeps/user')
@@ -159,14 +171,7 @@ export default new Vuex.Store({
       api.post('/vaultkeeps', payload)
         .then(res => {
           console.log("vaultkeep added!")
-        })
-      dispatch('goToVaultKeeps', payload.vaultId)
-    },
-    deleteVaultKeep({ commit, dispatch }, vaultkeep) {
-      api.put('/vaultkeeps/', vaultkeep)
-        .then(res => {
-          console.log("vaultkeep deleted!")
-          dispatch('goToVaultKeeps', vaultkeep.vaultId)
+          dispatch('goToVaultKeeps', payload.vaultId)
         })
     },
     getSelectedVault({ commit, dispatch }, payload) {
