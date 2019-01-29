@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center" style="margin-top: 80px;">
     <div class="card-columns" style="width: 95%">
       <div v-for="keep in Keeps" class="d-flex justify-content-center">
         <div class="col pl-0 pr-0">

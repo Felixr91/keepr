@@ -10,7 +10,7 @@
           <a class="navbar-brand logo-font" href="#" @click="goHome()">Keepr <i class="fas fa-archive"></i></a>
         </div>
         <!-- Collapse button -->
-        <button class="navbar-toggler first-button btn d-flex justify-content-end mr-2" onclick="this.blur();" type="button"
+        <button class="navbar-toggler first-button btn d-flex justify-content-end" onclick="this.blur();" type="button"
           data-toggle="collapse" data-target="#navbarSupportedContent20" aria-controls="navbarSupportedContent20"
           aria-expanded="false" aria-label="Toggle navigation">
           <div class="animated-icon1"><span></span><span></span><span></span></div>
@@ -107,14 +107,27 @@
 </script>
 
 <style>
+  /* @media only screen and (max-width: 300px) {
+    .navbar-toggler {
+      margin-right: -10px;
+      border: blue;
+    }
+  } */
+
+  .navbar-toggler {
+    background-color: black;
+    margin-right: 10px;
+    width: 50px;
+  }
+
   .bg-nav-white {
     background-color: white;
   }
 
   .bg-white-collapse {
     background-color: white;
-    margin-left: -10px;
-    margin-right: -10px;
+    margin-left: -20px;
+    margin-right: -20px;
   }
 
   .header {
@@ -136,7 +149,15 @@
 
   .logo-font {
     /* font-family: 'Fredoka One', cursive; */
-    font-size: 2rem;
+    font-size: 2.5rem;
+    padding-top: 0px;
+    margin-left: -5px;
+  }
+
+  @media only screen and (max-width: 300px) {
+    .logo-font {
+      margin-left: -20px;
+    }
   }
 
   /* Icon 1 */

@@ -1,6 +1,6 @@
 <template>
   <div class="row d-flex justify-content-center">
-    <div class="col-12">
+    <div class="col-12 modal-to-hide">
       <!-- Keeps Modal -->
       <form @submit.prevent="addKeep" id="modal">
         <div class="modal fade" id="orangeModalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -63,15 +63,17 @@
     </div>
     <!-- End of modal form -->
 
-    <div class="d-flex justify-content-center">
-      <div class="card-columns" style="width: 95%">
-        <div v-for="keep in keeps" class="d-flex justify-content-around">
-          <div class="col pl-0 pr-0">
-            <div class="card">
-              <div class="container hover-wrapper">
-                <img class="card-img-top" :src="keep.img" @click="goToKeepView(keep.id)">
-                <div class="img-info bottom-left pl-1 pr-1 hover-show"><i class="fas fa-trash-alt" @click="deleteKeep(keep.id)"></i></div>
-                </li>
+    <div class="home">
+      <div class="d-flex justify-content-center">
+        <div class="card-columns" style="width: 88%">
+          <div v-for="keep in keeps" class="d-flex justify-content-around">
+            <div class="col pl-0 pr-0">
+              <div class="card">
+                <div class="container hover-wrapper">
+                  <img class="card-img-top" :src="keep.img" @click="goToKeepView(keep.id)">
+                  <div class="img-info bottom-left pl-1 pr-1 hover-show"><i class="fas fa-trash-alt" @click="deleteKeep(keep.id)"></i></div>
+                  </li>
+                </div>
               </div>
             </div>
           </div>
@@ -119,6 +121,11 @@
       },
       submitKeep() {
         this.$store.dispatch('addKeep', this.newKeep);
+        // document.querySelector(".modal-content").style.display = "none";
+        // document.querySelector(".modal-backdrop").hidden = true;
+        // closeModal(){
+
+        // }
       }
     }
   }

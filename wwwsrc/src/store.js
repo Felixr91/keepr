@@ -5,14 +5,17 @@ import router from './router'
 
 Vue.use(Vuex)
 
+var production = !window.location.host.includes('localhost');
+var baseUrl = production ? 'https://keepr-grid.herokuapp.com/' : '//localhost:3000/';
+
 let auth = Axios.create({
-  baseURL: "http://localhost:5000/account/",
+  baseURL: baseUrl + "/account/",
   timeout: 3000,
   withCredentials: true
 })
 
 let api = Axios.create({
-  baseURL: "http://localhost:5000/api/",
+  baseURL: baseUrl + "/api/",
   timeout: 3000,
   withCredentials: true
 })
